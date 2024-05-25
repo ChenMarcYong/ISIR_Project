@@ -8,6 +8,8 @@
 #include "lights/point_light.hpp"
 #include "lights/quad_light.hpp"
 
+#include "materials/lambert_material.hpp"
+
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -97,11 +99,17 @@ namespace RT_ISICG
 		// Add objects .
 		// ================================================================
 		// OBJ.
-		//loadFileTriangleMesh( " UVsphere ", DATA_PATH + " uvsphere . obj " );
-		loadFileTriangleMesh( "Bunny", "data/Objet/Bunny.obj" );
-		_attachMaterialToObject( " CyanColor ", "Bunny_defaultobject" );
+
+
+		loadFileTriangleMesh( "UVsphere", "data/Objet/uvsphere.obj" );
+		_attachMaterialToObject( " CyanColor ", "UVsphere_defaultobject" );
+		//loadFileTriangleMesh( "Bunny", "data/Objet/Bunny.obj" );
+		//_attachMaterialToObject( " CyanColor ", "Bunny_defaultobject" );
+		//loadFileTriangleMesh( "Conf", "data/Objet/conference/conference.obj" );
+
+
 		// Pseudo Cornell box made with infinite planes .
-		_addObject( new Plane( " PlaneGround ", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		 _addObject( new Plane( " PlaneGround ", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 		_attachMaterialToObject( " GreyColor ", " PlaneGround " );
 		_addObject( new Plane( " PlaneLeft ", Vec3f( 5.f, 0.f, 0.f ), Vec3f( -1.f, 0.f, 0.f ) ) );
 		_attachMaterialToObject( " RedColor ", " PlaneLeft " );
@@ -117,9 +125,33 @@ namespace RT_ISICG
 		// Add lights .
 		// ================================================================
 		_addLight( new PointLight( WHITE, 100.f, Vec3f( 0.f, 3.f, -5.f ) ) );
+		//_addLight( new QuadLight(Vec3f( 900.f, 600.f, -300.f ), Vec3f( -800.f, 0.f, 0.f ), Vec3f( 0.f, 1.f, 300.f ), WHITE, 40.f ) );
 
 	}
 
+	void Scene::initTp5()
+	{
+		// ================================================================
+		// Add materials .
+		// ================================================================
+		_addMaterial( new ColorMaterial( " Red ", RED ) );
+
+		_addMaterial( new LambertMaterial( "GreyL", GREY ) );
+		_addMaterial( new ColorMaterial( "GreyC", GREY ) );
+		// ================================================================
+		// Add objects .
+		// ================================================================
+		// OBJ.
+		_addObject( new Plane( "Plane", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_addObject( new Sphere( "Sphere", Vec3f( 0.f, 0.f, 3.f ), 1.f) );
+
+		_attachMaterialToObject( "GreyL", "Sphere" );
+		_attachMaterialToObject( "Red", "Plane" );
+		// ================================================================
+		// Add lights .
+		// ================================================================
+		_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 0.f, -2.f ) ) );
+	}
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{
 		std::cout << "Loading: " << p_path << std::endl;
@@ -162,6 +194,9 @@ namespace RT_ISICG
 			}
 
 			_addObject( triMesh );
+			// création de la bvh.
+			triMesh->createBVH();
+
 
 			const aiMaterial * const mtl = scene->mMaterials[ mesh->mMaterialIndex ];
 			if ( mtl == nullptr )
@@ -192,6 +227,11 @@ namespace RT_ISICG
 		}
 		std::cout << "[DONE] " << scene->mNumMeshes << " meshes, " << cptTriangles << " triangles, " << cptVertices
 				  << " vertices." << std::endl;
+
+
+		
+
+
 	}
 
 	bool Scene::intersect( const Ray & p_ray, const float p_tMin, const float p_tMax, HitRecord & p_hitRecord ) const

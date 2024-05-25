@@ -27,6 +27,7 @@ namespace RT_ISICG
 		void initTp2();
 		void initTp3();
 		void initTp4();
+		void initTp5();
 
 
 		// Initialization from file.

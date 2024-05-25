@@ -22,11 +22,29 @@ namespace RT_ISICG
 		inline void extend( const Vec3f & p_point )
 		{
 			/// TODO
+
+			if ( p_point.x < _min.x ) _min.x = p_point.x;
+			if ( p_point.y < _min.y ) _min.y = p_point.y;
+			if ( p_point.z < _min.z ) _min.z = p_point.z;
+
+			if ( p_point.x > _max.x ) _max.x = p_point.x;
+			if ( p_point.y > _max.y ) _max.y = p_point.y;
+			if ( p_point.z > _max.z ) _max.z = p_point.z;
+
 		}
 		// Extends the AABB with another AABB
 		inline void extend( const AABB & p_aabb )
 		{
 			/// TODO
+
+			if ( p_aabb.getMin().x < _min.x ) _min.x = p_aabb.getMin().x;
+			if ( p_aabb.getMin().y < _min.y ) _min.y = p_aabb.getMin().y;
+			if ( p_aabb.getMin().z < _min.z ) _min.z = p_aabb.getMin().z;
+
+
+			if ( p_aabb.getMin().x > _max.x ) _max.x = p_aabb.getMin().x;
+			if ( p_aabb.getMin().y > _max.y ) _max.y = p_aabb.getMin().y;
+			if ( p_aabb.getMin().z > _max.z ) _max.z = p_aabb.getMin().z;
 		}
 
 		// Returns the AABB diagonal vector.
