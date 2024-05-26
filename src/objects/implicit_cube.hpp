@@ -19,7 +19,7 @@ namespace RT_ISICG
 
 		virtual float _sdf( const Vec3f & p_point ) const override
 		{
-			Vec3f distance				  = glm::abs( p_point - _centre ) - ( _taille / 2.0f );		// calcule de la distance entre le point et le centre du cube
+			Vec3f distance				  = glm::abs( p_point - _centre ) - ( _taille / 2.f );		// calcule de la distance entre le point et le centre du cube
 			float insideDistance  = glm::min( glm::max( distance.x, glm::max( distance.y, distance.z ) ), 0.f );	
 			float outsideDistance = glm::length( glm::max( distance, 0.f ) );
 			return insideDistance + outsideDistance;

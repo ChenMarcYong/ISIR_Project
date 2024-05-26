@@ -12,6 +12,7 @@
 #include "lights/point_light.hpp"
 #include "lights/quad_light.hpp"
 #include "lights/sphere_light.hpp"
+#include "lights/directional_light.hpp"
 
 #include "materials/color_material.hpp"
 #include "materials/lambert_material.hpp"
@@ -331,7 +332,7 @@ namespace RT_ISICG
 		_addMaterial( new ColorMaterial( "GreyColor", GREY ) );
 		_addMaterial( new MicrofacetMaterial( "GoldMicro", Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f ) );
 		_addMaterial( new MicrofacetMaterial( "ArgentMicro", Vec3f( 0.753f, 0.753f, 0.753f ), 0.3f, 0.1f ) );
-
+		_addMaterial( new ColorMaterial( "GreenColor", GREEN ) );
 
 		_addObject( new Sphere( "Sphere", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -5.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
@@ -342,12 +343,14 @@ namespace RT_ISICG
 
 
 		_attachMaterialToObject( "Red", "Sphere" );
-		_attachMaterialToObject( "GreyColor", "PlaneGround" );
+		_attachMaterialToObject( "GreenColor", "PlaneGround" );
+		
 		//_attachMaterialToObject( "ArgentMicro", "Tore" );
 
 		//_addLight(new QuadLight( Vec3f( 0.f, 5.f, 0.f ), Vec3f( -2.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 2.f ), WHITE, 40.f ) );
-		//_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 2.f, -5.f ) ) );
-		_addLight( new SphereLight( Vec3f( 0.f, 5.f, 0.f ), 2.f, WHITE, 40.f ) );
+		_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 2.f, -5.f ) ) );
+		//_addLight( new SphereLight( Vec3f( 0.f, 5.f, 0.f ), 2.f, WHITE, 40.f ) );
+		_addLight( new DirectionalLight( Vec3f( 0.f, 1.f, 0.f ), WHITE, 0.2f ) );
 
 		;
 	}
