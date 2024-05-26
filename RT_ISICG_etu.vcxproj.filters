@@ -116,9 +116,6 @@
     <ClCompile Include="src\integrators\whitted_integrator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\implicit_sphere.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\defines.hpp">
@@ -248,6 +245,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\objects\implicit_sphere.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\implicit_tore.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\implict_fractale_mandelbub.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\implicit_cube.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

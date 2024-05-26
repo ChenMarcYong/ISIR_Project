@@ -31,6 +31,8 @@ namespace RT_ISICG
 		void initTp6();
 		void initTp7();
 		void MagnifiqueImageLaPlusBelle();
+		void Projet_tore();
+		void Projet_fractale();
 
 
 		// Initialization from file.

@@ -16,12 +16,12 @@ namespace RT_ISICG
 
 		// Create and init scene.
 		Scene scene;
-		scene.MagnifiqueImageLaPlusBelle();
+		scene.Projet_fractale();
 
 		// Create a perspective camera.
 		//PerspectiveCamera camera( float( imgWidth ) / imgHeight );
 
-		PerspectiveCamera camera( Vec3f( 0.f, 0.5f, -1.f ), // Vec3f( 0.f, 2.f, -7.f ) tp4
+		PerspectiveCamera camera( Vec3f( 0.f, 0.1f, -3.f ), // Vec3f( 0.f, 2.f, -7.f ) tp4
 								  Vec3f( 0.f, 0.f, 79.f ),
 								  Vec3f( 0.f, 0.f, 1.f ),
 								  60.f,
@@ -32,7 +32,7 @@ namespace RT_ISICG
 		//renderer.setIntegrator( IntegratorType::RAY_CAST );
 		renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
 		renderer.setBackgroundColor( GREY );
-		renderer.setNbPixelSamples( 1 );
+		renderer.setNbPixelSamples( 64 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;

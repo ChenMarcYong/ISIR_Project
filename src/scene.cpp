@@ -5,6 +5,9 @@
 #include "objects/triangle_mesh.hpp"
 #include "objects/Plane.hpp"
 #include "objects/implicit_sphere.hpp"
+#include "objects/implicit_tore.hpp"
+#include "objects/implict_fractale_mandelbub.hpp"
+#include "objects/implicit_cube.hpp"
 
 #include "lights/point_light.hpp"
 #include "lights/quad_light.hpp"
@@ -252,7 +255,7 @@ namespace RT_ISICG
 		//) );
 	}
 
-				void Scene::MagnifiqueImageLaPlusBelle()
+		void Scene::MagnifiqueImageLaPlusBelle()
 	{
 		// ================================================================
 		// Add materials .
@@ -265,18 +268,31 @@ namespace RT_ISICG
 		_addMaterial( new PlasticMaterial( "GreyP", GREY, GREY, 128.f ) );
 		_addMaterial( new PlasticMaterial( "RedP", RED, RED, 128.f ) );
 		_addMaterial( new MicrofacetMaterial( "GoldMicro", Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f ) );
+		_addMaterial( new MirrorMaterial( "Mirror" ) );
+		_addMaterial( new TransparentMaterial( "Transaprent" ) );
+
 		// ================================================================
 		// Add objects .
 		// ================================================================
 		// OBJ.
 
-		_addObject( new Plane( " PlaneGround ", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
-		_attachMaterialToObject( "RedP", " PlaneGround " );
-		//_addObject( new Sphere( "Sphere", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
-		//_attachMaterialToObject( "GoldMicro", "Sphere" );
+		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_addObject( new Plane( "PlaneCeiling", Vec3f( 0.f, 7.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_addObject( new Plane( "PlaneFront", Vec3f( 0.f, 0.f, 10.f ), Vec3f( 0.f, 0.f, -1.f ) ) );
 
-		_addObject( new ImplicitSphere( "implicitSphere", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
-		_attachMaterialToObject( "GoldMicro", "implicitSphere" );
+
+		//loadFileTriangleMesh( "Bunny", "data/Objet/Bunny.obj" );
+		//_attachMaterialToObject( "Transaprent", "Bunny_defaultobject" );
+
+		_attachMaterialToObject( "GreyL", "PlaneGround" );
+		_attachMaterialToObject( "GreyL", "PlaneCeiling" );
+		_attachMaterialToObject( "GreyL", "PlaneFront" );
+
+		_addObject( new Sphere( "Sphere", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_attachMaterialToObject( "Transaprent", "Sphere" );
+
+		//_addObject( new ImplicitSphere( "implicitSphere", Vec3f( 0.f, 0.f, 5.f ), 1.f ) );
+		//_attachMaterialToObject( "GoldMicro", "implicitSphere" );
 		// loadFileTriangleMesh( "Bunny", "data/Objet/Bunny.obj" );
 		//_attachMaterialToObject( "GoldMicro", "Bunny_defaultobject" );
 
@@ -284,11 +300,53 @@ namespace RT_ISICG
 		// Add lights .
 		// ================================================================
 		//_addLight( new PointLight( WHITE, 100.f, Vec3f( 0.f, 5.f, -5.f ) ) );		// golden bunny
-		_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 0.f, -2.f ) ) );
-		//_addLight(new QuadLight( Vec3f( 1.f, 10.f, 2.f ), Vec3f( -2.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 2.f ),
-		//WHITE, 40.f)); ) );
+		//_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 0.f, -2.f ) ) );
+		//_addLight( new PointLight( WHITE, 100.f, Vec3f( 0.f, 5.f, 0.f ) ) );
+
+		_addLight(new QuadLight( Vec3f( 0.f, 5.f, 0.f ), Vec3f( -2.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 2.f ), WHITE, 40.f));;
 	}
 
+
+
+		void Scene::Projet_tore()
+	{
+		_addMaterial( new ColorMaterial( "Red", RED ) );
+		_addMaterial( new ColorMaterial( "GreyColor", GREY ) );
+
+
+		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_addObject( new ImplicitTore( "Tore", Vec3f( 0.f, 0.f, 3.f ), 3.f, 1.f));
+
+		_attachMaterialToObject( "GreyColor", "PlaneGround" );
+		_attachMaterialToObject( "Red", "Tore" );
+
+		_addLight(new QuadLight( Vec3f( 0.f, 5.f, 0.f ), Vec3f( -2.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 2.f ), WHITE, 40.f ) );
+		;
+	}
+
+		void Scene::Projet_fractale()
+	{
+		_addMaterial( new ColorMaterial( "Red", RED ) );
+		_addMaterial( new ColorMaterial( "GreyColor", GREY ) );
+		_addMaterial( new MicrofacetMaterial( "GoldMicro", Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f ) );
+		_addMaterial( new MicrofacetMaterial( "ArgentMicro", Vec3f( 0.753f, 0.753f, 0.753f ), 0.3f, 0.1f ) );
+
+
+
+		//_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -5.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		//_addObject( new ImplicitTore( "Tore", Vec3f( 0.f, 1.f, 3.f ), 5.f, 3.f ) );
+
+		_addObject( new ImplicitMandelbulb( "Mandelbub",  8, 16.0f ));
+		//_addObject( new ImplicitCube( "Cube", Vec3f( 0.f, 0.f, 3.f ), 4.f ) );
+		//_attachMaterialToObject( "Red", "Cube" );
+		//_attachMaterialToObject( "GreyColor", "PlaneGround" );
+		//_attachMaterialToObject( "ArgentMicro", "Tore" );
+
+		//_addLight(new QuadLight( Vec3f( 0.f, 5.f, 0.f ), Vec3f( -2.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 2.f ), WHITE, 40.f ) );
+		_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 2.f, -5.f ) ) );
+
+		;
+	}
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{
