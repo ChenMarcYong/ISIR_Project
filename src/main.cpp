@@ -16,7 +16,7 @@ namespace RT_ISICG
 
 		// Create and init scene.
 		Scene scene;
-		scene.MagnifiqueImageLaPlusBelles();
+		scene.MagnifiqueImageLaPlusBelle();
 
 		// Create a perspective camera.
 		//PerspectiveCamera camera( float( imgWidth ) / imgHeight );
