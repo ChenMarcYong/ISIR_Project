@@ -11,6 +11,7 @@
 
 #include "lights/point_light.hpp"
 #include "lights/quad_light.hpp"
+#include "lights/sphere_light.hpp"
 
 #include "materials/color_material.hpp"
 #include "materials/lambert_material.hpp"
@@ -332,18 +333,21 @@ namespace RT_ISICG
 		_addMaterial( new MicrofacetMaterial( "ArgentMicro", Vec3f( 0.753f, 0.753f, 0.753f ), 0.3f, 0.1f ) );
 
 
-
-		//_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -5.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_addObject( new Sphere( "Sphere", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -5.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 		//_addObject( new ImplicitTore( "Tore", Vec3f( 0.f, 1.f, 3.f ), 5.f, 3.f ) );
 
-		_addObject( new ImplicitMandelbulb( "Mandelbub",  8, 16.0f ));
+		//_addObject( new ImplicitMandelbulb( "Mandelbub",  8, 16.0f ));
 		//_addObject( new ImplicitCube( "Cube", Vec3f( 0.f, 0.f, 3.f ), 4.f ) );
-		//_attachMaterialToObject( "Red", "Cube" );
-		//_attachMaterialToObject( "GreyColor", "PlaneGround" );
+
+
+		_attachMaterialToObject( "Red", "Sphere" );
+		_attachMaterialToObject( "GreyColor", "PlaneGround" );
 		//_attachMaterialToObject( "ArgentMicro", "Tore" );
 
 		//_addLight(new QuadLight( Vec3f( 0.f, 5.f, 0.f ), Vec3f( -2.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 2.f ), WHITE, 40.f ) );
-		_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 2.f, -5.f ) ) );
+		//_addLight( new PointLight( WHITE, 60.f, Vec3f( 0.f, 2.f, -5.f ) ) );
+		_addLight( new SphereLight( Vec3f( 0.f, 5.f, 0.f ), 2.f, WHITE, 40.f ) );
 
 		;
 	}

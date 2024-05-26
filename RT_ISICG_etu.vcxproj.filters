@@ -256,5 +256,8 @@
     <ClInclude Include="src\objects\implicit_cube.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\lights\sphere_light.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
