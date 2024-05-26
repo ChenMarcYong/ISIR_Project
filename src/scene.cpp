@@ -252,7 +252,7 @@ namespace RT_ISICG
 		//) );
 	}
 
-				void Scene::MagnifiqueImageLaPlusBelle()
+				void Scene::MagnifiqueImageLaPlusBelles()
 	{
 		// ================================================================
 		// Add materials .
